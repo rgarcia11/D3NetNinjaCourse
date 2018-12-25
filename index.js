@@ -19,10 +19,11 @@ const xAxisGroup = graph.append('g')
     .attr('transform', `translate(0, ${graphHeight})`);
 const yAxisGroup = graph.append('g');
 
-d3.json('menu.js').then( data => {
-    // const min = d3.min(data, d => d.orders);
-    // const max = d3.max(data, d => d.orders);
-    // const extent = d3.extent(data, d => d.orders);
+db.collection('dishes').get().then( res => {
+    var data = [];
+    res.docs.forEach(doc => {
+        data.push(doc.data());
+    });
 
     const y = d3.scaleLinear()
         .domain([0, d3.max(data, d => d.orders)])
