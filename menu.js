@@ -14,5 +14,9 @@
     {
         "name": "vegan surprise",
         "orders": 900
+    },
+    {
+        "name": "vegan burger",
+        "orders": 1500
     }
 ]
