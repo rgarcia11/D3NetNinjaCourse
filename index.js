@@ -90,3 +90,11 @@ db.collection('dishes').get().then( res => {
     }, 3000);
 
 });
+
+var data = [];
+
+db.collection('dishes').onSnapshot(res => {
+    res.docChanges().forEach(docChange => {
+        change.doc.data();
+    });
+});
