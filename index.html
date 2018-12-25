@@ -9,8 +9,23 @@
 <body>
     <div class="canvas">
     </div>
+    <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBoKSJT1Wh5L5Yh_EcMOSRvJvsaH5_8NhI",
+            authDomain: "d3-netninja.firebaseapp.com",
+            databaseURL: "https://d3-netninja.firebaseio.com",
+            projectId: "d3-netninja",
+            storageBucket: "d3-netninja.appspot.com",
+            messagingSenderId: "1042361417502"
+        };
+        firebase.initializeApp(config);
+        const db = firebase.firestore();
+        db.settings({ timestampsInSnapshots: true });
+    </script>
     <script src="https://d3js.org/d3.v5.js"></script>
     <script src="index.js"></script>
-
 </body>
 </html>
