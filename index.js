@@ -42,6 +42,7 @@ xAxisGroup.selectAll('text')
 
 // update function
 const update = data => {
+
     // 1. update scales (domains)
     y.domain([0, d3.max(data, d => d.orders)]);
     x.domain(data.map( item => item.name ));
@@ -73,13 +74,19 @@ const update = data => {
     // Call Axis
     xAxisGroup.call(xAxis);
     yAxisGroup.call(yAxis);
+
 }
 
 db.collection('dishes').get().then( res => {
+
     var data = [];
     res.docs.forEach(doc => {
         data.push(doc.data());
     });
+
+    d3.interval(() => {
+        data[0].orders += 50;
+        update(data);
+    }, 1000);
     
-    update(data);
 });
