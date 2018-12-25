@@ -26,7 +26,7 @@ d3.json('menu.js').then( data => {
 
     const y = d3.scaleLinear()
         .domain([0, d3.max(data, d => d.orders)])
-        .range([0, graphHeight]);
+        .range([graphHeight, 0]);
     
     const x = d3.scaleBand()
         .domain(data.map( item => item.name ))
@@ -38,23 +38,32 @@ d3.json('menu.js').then( data => {
         .data(data);
 
     rects.attr('width', x.bandwidth)
-        .attr('height', d => y(d.orders))
+        .attr('height', d => graphHeight - y(d.orders))
         .attr('fill', 'orange')
-        .attr('x', d => x(d.name));
+        .attr('x', d => x(d.name))
+        .attr('y', d => y(d.orders));
 
     rects.enter()
         .append('rect')
             .attr('width', x.bandwidth)
-            .attr('height', d => y(d.orders))
+            .attr('height', d => graphHeight - y(d.orders))
             .attr('fill', 'orange')
-            .attr('x', d => x(d.name));
+            .attr('x', d => x(d.name))
+            .attr('y', d => y(d.orders));
 
     rects.exit().remove();
 
     // create and call the axis
     const xAxis = d3.axisBottom(x);
-    const yAxis = d3.axisLeft(y);
+    const yAxis = d3.axisLeft(y)
+        .ticks(4)
+        .tickFormat(d => `${d} orders`);
 
     xAxisGroup.call(xAxis);
     yAxisGroup.call(yAxis);
+
+    xAxisGroup.selectAll('text')
+        .attr('transform', 'rotate(-40)')
+        .attr('text-anchor', 'end')
+        .attr('fill', 'orange');
 });
