@@ -19,31 +19,49 @@ const xAxisGroup = graph.append('g')
     .attr('transform', `translate(0, ${graphHeight})`);
 const yAxisGroup = graph.append('g');
 
-db.collection('dishes').get().then( res => {
-    var data = [];
-    res.docs.forEach(doc => {
-        data.push(doc.data());
-    });
+// create y and x scale functions
+const y = d3.scaleLinear()
+    .range([graphHeight, 0]);
 
-    const y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.orders)])
-        .range([graphHeight, 0]);
-    
-    const x = d3.scaleBand()
-        .domain(data.map( item => item.name ))
-        .range([0, 500])
-        .paddingInner(0.2)
-        .paddingOuter(0.2);
+const x = d3.scaleBand()
+    .range([0, 500])
+    .paddingInner(0.2)
+    .paddingOuter(0.2);
 
+// create and call the axis
+const xAxis = d3.axisBottom(x);
+const yAxis = d3.axisLeft(y)
+    .ticks(4)
+    .tickFormat(d => `${d} orders`);    
+
+// update x axis text angle
+xAxisGroup.selectAll('text')
+    .attr('transform', 'rotate(-40)')
+    .attr('text-anchor', 'end')
+    .attr('fill', 'orange');
+
+// update function
+const update = data => {
+
+    // 1. update scales (domains)
+    y.domain([0, d3.max(data, d => d.orders)]);
+    x.domain(data.map( item => item.name ));
+
+    // 2. join updated data to elements
     const rects = graph.selectAll('rect')
         .data(data);
 
+    // 3. remove exit selection
+    rects.exit().remove();
+
+    // 4. update current shapes in the dom
     rects.attr('width', x.bandwidth)
         .attr('height', d => graphHeight - y(d.orders))
         .attr('fill', 'orange')
         .attr('x', d => x(d.name))
         .attr('y', d => y(d.orders));
 
+    // 5. append the enter selection to the dom
     rects.enter()
         .append('rect')
             .attr('width', x.bandwidth)
@@ -52,19 +70,37 @@ db.collection('dishes').get().then( res => {
             .attr('x', d => x(d.name))
             .attr('y', d => y(d.orders));
 
-    rects.exit().remove();
-
-    // create and call the axis
-    const xAxis = d3.axisBottom(x);
-    const yAxis = d3.axisLeft(y)
-        .ticks(4)
-        .tickFormat(d => `${d} orders`);
-
+    // 6. Other elements that need to be displayed
+    // Call Axis
     xAxisGroup.call(xAxis);
     yAxisGroup.call(yAxis);
 
-    xAxisGroup.selectAll('text')
-        .attr('transform', 'rotate(-40)')
-        .attr('text-anchor', 'end')
-        .attr('fill', 'orange');
+}
+
+var data = [];
+
+db.collection('dishes').onSnapshot(res => {
+    
+    res.docChanges().forEach(change => {
+        const doc = {...change.doc.data(), id: change.doc.id};
+
+        switch(change.type){
+            case 'added':
+                data.push(doc);
+                break;
+            case 'modified':
+                const index = data.findIndex(item => item.id == doc.id);
+                data[index] = doc;
+                break;
+            case 'removed':
+                data = data.filter(item => item.id !== doc.id);
+                data.remove(doc);
+                break;
+            default:
+                break;
+        }        
+    });
+
+    update(data);
+
 });
