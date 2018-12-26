@@ -41,7 +41,7 @@ xAxisGroup.selectAll('text')
     .attr('fill', 'orange');
 
 // vertical bar transition
-const t = d3.transition().duration(750);
+const t = d3.transition().duration(1500);
 
 // update function
 const update = data => {
@@ -66,8 +66,8 @@ const update = data => {
             .merge(rects)
             .attr('fill', 'orange')
             .attr('x', d => x(d.name))
-            .attr('width', x.bandwidth)
             .transition(t)
+                .attrTween('width', widthTween)
                 .attr('y', d => y(d.orders))
                 .attr('height', d => graphHeight - y(d.orders));
 
@@ -105,3 +105,12 @@ db.collection('dishes').onSnapshot(res => {
     update(data);
 
 });
+
+// Tweens
+
+const widthTween = d => {
+
+    let i = d3.interpolate(0, x.bandwidth());
+    return t => i(t);
+
+}
