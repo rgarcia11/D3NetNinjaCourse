@@ -40,6 +40,9 @@ xAxisGroup.selectAll('text')
     .attr('text-anchor', 'end')
     .attr('fill', 'orange');
 
+// vertical bar transition
+const t = d3.transition().duration(750);
+
 // update function
 const update = data => {
 
@@ -54,23 +57,17 @@ const update = data => {
     // 3. remove exit selection
     rects.exit().remove();
 
-    // 4. update current shapes in the dom
-    rects.attr('width', x.bandwidth)
-        .attr('fill', 'orange')
-        .attr('x', d => x(d.name))
-        .transition().duration(750)
-            .attr('y', d => y(d.orders))
-            .attr('height', d => graphHeight - y(d.orders));
-
+    // 4. update current shapes in the dom... this is done with the merge() function in 5.
     // 5. append the enter selection to the dom
     rects.enter()
         .append('rect')
-            .attr('width', x.bandwidth)
             .attr('height', 0)
-            .attr('fill', 'orange')
             .attr('y', graphHeight)
+            .merge(rects)
+            .attr('fill', 'orange')
             .attr('x', d => x(d.name))
-            .transition().duration(750)
+            .attr('width', x.bandwidth)
+            .transition(t)
                 .attr('y', d => y(d.orders))
                 .attr('height', d => graphHeight - y(d.orders));
 
