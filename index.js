@@ -56,18 +56,19 @@ const update = data => {
 
     // 4. update current shapes in the dom
     rects.attr('width', x.bandwidth)
-        .attr('height', d => graphHeight - y(d.orders))
         .attr('fill', 'orange')
         .attr('x', d => x(d.name))
-        .attr('y', d => y(d.orders));
+        .transition().duration(750)
+            .attr('y', d => y(d.orders))
+            .attr('height', d => graphHeight - y(d.orders));
 
     // 5. append the enter selection to the dom
     rects.enter()
         .append('rect')
             .attr('width', x.bandwidth)
             .attr('height', 0)
-            .attr('y', graphHeight)
             .attr('fill', 'orange')
+            .attr('y', graphHeight)
             .attr('x', d => x(d.name))
             .transition().duration(750)
                 .attr('y', d => y(d.orders))
