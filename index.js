@@ -40,6 +40,9 @@ xAxisGroup.selectAll('text')
     .attr('text-anchor', 'end')
     .attr('fill', 'orange');
 
+// vertical bar transition
+const t = d3.transition().duration(1500);
+
 // update function
 const update = data => {
 
@@ -54,21 +57,19 @@ const update = data => {
     // 3. remove exit selection
     rects.exit().remove();
 
-    // 4. update current shapes in the dom
-    rects.attr('width', x.bandwidth)
-        .attr('height', d => graphHeight - y(d.orders))
-        .attr('fill', 'orange')
-        .attr('x', d => x(d.name))
-        .attr('y', d => y(d.orders));
-
+    // 4. update current shapes in the dom... this is done with the merge() function in 5.
     // 5. append the enter selection to the dom
     rects.enter()
         .append('rect')
-            .attr('width', x.bandwidth)
-            .attr('height', d => graphHeight - y(d.orders))
+            .attr('height', 0)
+            .attr('y', graphHeight)
+            .merge(rects)
             .attr('fill', 'orange')
             .attr('x', d => x(d.name))
-            .attr('y', d => y(d.orders));
+            .transition(t)
+                .attrTween('width', widthTween)
+                .attr('y', d => y(d.orders))
+                .attr('height', d => graphHeight - y(d.orders));
 
     // 6. Other elements that need to be displayed
     // Call Axis
@@ -104,3 +105,12 @@ db.collection('dishes').onSnapshot(res => {
     update(data);
 
 });
+
+// Tweens
+
+const widthTween = d => {
+
+    let i = d3.interpolate(0, x.bandwidth());
+    return t => i(t);
+
+}
