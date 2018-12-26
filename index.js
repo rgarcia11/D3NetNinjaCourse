@@ -65,10 +65,13 @@ const update = data => {
     rects.enter()
         .append('rect')
             .attr('width', x.bandwidth)
-            .attr('height', d => graphHeight - y(d.orders))
+            .attr('height', 0)
+            .attr('y', graphHeight)
             .attr('fill', 'orange')
             .attr('x', d => x(d.name))
-            .attr('y', d => y(d.orders));
+            .transition().duration(750)
+                .attr('y', d => y(d.orders))
+                .attr('height', d => graphHeight - y(d.orders));
 
     // 6. Other elements that need to be displayed
     // Call Axis
