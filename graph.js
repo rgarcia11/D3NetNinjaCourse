@@ -34,16 +34,14 @@ const update = data => {
 
     paths.exit().remove();
 
-    paths.attr('d', arcPath)
-        .attr('stroke', '#fff')
-        .attr('stroke-width', 3);
+    paths.attr('d', arcPath);
 
     paths.enter()
         .append('path')
         .attr('class', 'arc')
         .attr('d', arcPath)
         .attr('stroke', '#fff')
-        .attr('stroke-width', 0.5)
+        .attr('stroke-width', 0.75)
         .attr('fill', d => colour(d.data.name));
 }
 
