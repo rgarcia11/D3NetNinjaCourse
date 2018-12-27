@@ -60,6 +60,10 @@ const update = data => {
         .transition().duration(600)
             .attrTween('d', arcTweenEnter);
 
+    graph.selectAll('path')
+        .on('mouseover', handleMouseOver)
+        .on('mouseout', handleMouseOut);
+
     legendGroup.call(legend);
     legendGroup.selectAll('text').attr('fill', 'white');
 }
@@ -119,3 +123,15 @@ function arcTweenUpdate(d){
         return arcPath(i(t));
     };
 }
+
+const handleMouseOver = (d, i, n) => {
+    d3.select(n[i])
+        .transition().duration(300)
+            .attr('fill', '#e0f2f1');
+};
+
+const handleMouseOut = (d, i, n) => {
+    d3.select(n[i])
+        .transition().duration(300)
+            .attr('fill', colour(d.data.name));
+};
