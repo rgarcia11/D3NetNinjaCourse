@@ -42,7 +42,9 @@ const update = data => {
         .attr('d', arcPath)
         .attr('stroke', '#fff')
         .attr('stroke-width', 0.75)
-        .attr('fill', d => colour(d.data.name));
+        .attr('fill', d => colour(d.data.name))
+        .transition().duration(600)
+            .attrTween('d', arcTweenEnter);
 }
 
 let data = [];
@@ -73,3 +75,12 @@ db.collection('expenses').onSnapshot(res => {
     update(data);
 
 });
+
+const arcTweenEnter = d => {
+    let i = d3.interpolate(d.endAngle, d.startAngle);
+
+    return t => {
+        d.startAngle = i(t);
+        return arcPath(d);
+    };
+};
