@@ -33,6 +33,18 @@ const legend = d3.legendColor()
     .shapePadding(20)
     .scale(colour);
 
+const tip = d3.tip()
+    .attr('class', 'tip card')
+    .html(d => {
+        let content = `<div class="name">${d.data.name}</div>`;
+        content += `<div class="cost">${d.data.cost}</div>`;
+        content += `<div class="leon">Hola león lejano</div>`;
+        content += `<div class="delete">haz click para borrar</div>`
+        return content;
+    });
+
+graph.call(tip);
+
 const update = data => {
 
     colour.domain(data.map(d => d.name));
@@ -61,8 +73,14 @@ const update = data => {
             .attrTween('d', arcTweenEnter);
 
     graph.selectAll('path')
-        .on('mouseover', handleMouseOver)
-        .on('mouseout', handleMouseOut)
+        .on('mouseover', (d, i, n) => {
+            tip.show(d, n[i])
+            handleMouseOver(d, i, n)
+        })
+        .on('mouseout', (d, i, n) => {
+            tip.hide()
+            handleMouseOut(d, i, n)
+        })
         .on('click', handleMouseClick);
 
     legendGroup.call(legend);
