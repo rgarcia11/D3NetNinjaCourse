@@ -23,3 +23,12 @@ form.addEventListener('submit', e => {
     }
 
 });
+
+// Tweens
+
+const widthTween = d => {
+
+    let i = d3.interpolate(0, x.bandwidth());
+    return t => i(t);
+
+}
