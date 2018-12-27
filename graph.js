@@ -62,7 +62,8 @@ const update = data => {
 
     graph.selectAll('path')
         .on('mouseover', handleMouseOver)
-        .on('mouseout', handleMouseOut);
+        .on('mouseout', handleMouseOut)
+        .on('click', handleMouseClick);
 
     legendGroup.call(legend);
     legendGroup.selectAll('text').attr('fill', 'white');
@@ -134,4 +135,8 @@ const handleMouseOut = (d, i, n) => {
     d3.select(n[i])
         .transition('changeSliceFill').duration(300)
             .attr('fill', colour(d.data.name));
+};
+
+const handleMouseClick = d => {
+    db.collection('expenses').doc(d.data.id).delete()
 };
