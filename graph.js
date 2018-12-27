@@ -26,7 +26,21 @@ const arcPath = d3.arc()
 graph.append('path').attr('d', arcPath(angles[0]));
 
 const update = data => {
-    console.log(data);
+    const paths = graph.selectAll('path')
+        .data(pie(data));
+
+    paths.exit().remove();
+
+    paths.attr('d', arcPath)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 3);
+
+    paths.enter()
+        .append('path')
+        .attr('class', 'arc')
+        .attr('d', arcPath)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 3);
 }
 
 let data = [];
