@@ -82,7 +82,7 @@ const update = data => {
             handleMouseOut(d, i, n)
         })
         .on('click', handleMouseClick);
-
+  
     legendGroup.call(legend);
     legendGroup.selectAll('text').attr('fill', 'white');
 }
