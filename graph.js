@@ -18,3 +18,9 @@ const angles = pie([
     { name: 'bills', cost: 300 },
     { name: 'gaming', cost: 200 }
 ]);
+
+const arcPath = d3.arc()
+    .outerRadius(dims.radius)
+    .innerRadius(dims.radius / 2);
+
+graph.append('path').attr('d', arcPath(angles[0]))
