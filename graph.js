@@ -34,9 +34,31 @@ const yAxis = d3.axisLeft(y)
     .tickFormat(d => `${d}m`);
 
 const update = data => {
+    // 1. scale domains and axis
     x.domain(d3.extent(data, d => new Date(d.date)));
     y.domain([0, d3.max(data, d => d.distance)]);
 
+    // 2. link data
+    const circles = graph.selectAll('circle')
+        .data(data);
+
+    // 3. exit selection
+    circles.exit().remove();
+
+    // 4. current selection
+    circles.attr('cx', d => x(new Date(d.date)))
+        .attr('cy', d => y(d.distance));
+
+    // 5. enter selection
+    circles.enter()
+        .append('circle')
+            .attr('cx', d => x(new Date(d.date)))
+            .attr('cy', d => y(d.distance))
+            .attr('r', 5)
+            .attr('fill', '#ffeb3b');
+
+    // 6. Other elements
+    // Axis
     xAxisGroup.call(xAxis);
     yAxisGroup.call(yAxis);
     xAxisGroup.selectAll('text')
