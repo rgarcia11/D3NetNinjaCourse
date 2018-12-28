@@ -27,9 +27,11 @@ yAxisGroup = graph.append('g')
 
 
 const xAxis = d3.axisBottom(x)
-    .ticks(4);
+    .ticks(4)
+    .tickFormat(d3.timeFormat('%d %b %H:%m'));
 const yAxis = d3.axisLeft(y)
-    .ticks(4);
+    .ticks(4)
+    .tickFormat(d => `${d}m`);
 
 const update = data => {
     x.domain(d3.extent(data, d => new Date(d.date)));
@@ -37,6 +39,9 @@ const update = data => {
 
     xAxisGroup.call(xAxis);
     yAxisGroup.call(yAxis);
+    xAxisGroup.selectAll('text')
+        .attr('transform', `rotate(-40)`)
+        .attr('text-anchor', `end`);
 };
 
 // data and firestore

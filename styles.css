@@ -33,10 +33,12 @@ form span{
     color: #212121 !important;
 }
 
-.x-axis{
-    color: #fff;
+.x-axis path, .y-axis path,
+.x-axis line, .y-axis line{
+    stroke: #ffeb3b;
 }
 
-.y-axis{
-    color: #fff;
+.x-axis, .y-axis{
+    color: #ffeb3b;
 }
+
