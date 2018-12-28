@@ -27,10 +27,18 @@ form span{
 
 .input-field i{
     color: #ffeb3b !important;
+    transition: opacity 0.3s ease-in !important;
+    -ms-transition: opacity 0.3s ease-in !important;
+    -moz-transition: opacity 0.3s ease-in !important;
+    -webkit-transition: opacity 0.3s ease-in !important;
 }
 
 .input-field i.active{
     opacity: 0 !important;
+    transition: opacity 0.2s ease-out !important;
+    -ms-transition: opacity 0.2s ease-out !important;
+    -moz-transition: opacity 0.2s ease-out !important;
+    -webkit-transition: opacity 0.2s ease-out !important;
 }
 
 .x-axis path, .y-axis path,
