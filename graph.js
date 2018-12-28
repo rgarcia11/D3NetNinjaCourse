@@ -65,6 +65,21 @@ const update = data => {
             .attr('r', 5)
             .attr('fill', '#ffeb3b');
 
+    // Animations
+    graph.selectAll('circle')
+        .on('mouseover', (d, i, n) => {
+            d3.select(n[i])
+                .transition().duration(150)
+                    .attr('r', 7)
+                    .attr('fill', '#ffffff')
+        })
+        .on('mouseleave', (d, i, n) => {
+            d3.select(n[i])
+                .transition().duration(150)
+                    .attr('r', 5)
+                    .attr('fill', '#ffeb3b')
+        });
+
     // 6. Other elements
     // Axis
     xAxisGroup.call(xAxis);
