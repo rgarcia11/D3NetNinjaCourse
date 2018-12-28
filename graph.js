@@ -39,7 +39,18 @@ const line = d3.line()
 
 const path = graph.append('path');
 
+const hoverCrossGroup = graph.append('g')
+    .attr('class', 'lines')
+    .style('opacity', 0);
+const yHoverCross = hoverCrossGroup.append('line')
+    .style('stroke-dasharray', 4)
+    .attr('stroke', '#ffffff');
+const xHoverCross = hoverCrossGroup.append('line')
+    .style('stroke-dasharray', 4)
+    .attr('stroke', '#ffffff');
+
 const update = data => {
+
     // 1. scale domains and axis
     x.domain(d3.extent(data, d => new Date(d.date)));
     y.domain([0, d3.max(data, d => d.distance)]);
@@ -71,13 +82,30 @@ const update = data => {
             d3.select(n[i])
                 .transition().duration(150)
                     .attr('r', 7)
-                    .attr('fill', '#ffffff')
+                    .attr('fill', '#ffffff');
+                    
+            yHoverCross
+                .attr('x1', 0)
+                .attr('x2', x(new Date(d.date)))
+                .attr('y1', y(d.distance))
+                .attr('y2', y(d.distance));
+
+            xHoverCross
+                .attr('x1', x(new Date(d.date)))
+                .attr('x2', x(new Date(d.date)))
+                .attr('y1', y(d.distance))
+                .attr('y2', graphHeight);
+
+            hoverCrossGroup.transition().duration(150)
+                .style('opacity', 1);
         })
         .on('mouseleave', (d, i, n) => {
             d3.select(n[i])
                 .transition().duration(150)
                     .attr('r', 5)
-                    .attr('fill', '#ffeb3b')
+                    .attr('fill', '#ffeb3b');
+            hoverCrossGroup.transition().duration(150)
+                .style('opacity', 0);
         });
 
     // 6. Other elements

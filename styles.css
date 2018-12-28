@@ -30,7 +30,7 @@ form span{
 }
 
 .input-field i.active{
-    color: #212121 !important;
+    opacity: 0 !important;
 }
 
 .x-axis path, .y-axis path,
