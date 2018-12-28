@@ -5,92 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         text{
-            font-family;
+            font-family: arial;
         }
     </style>
 </head>
-<body >
+<body class="amber darken-4">
 
     <div class="canvas"></div>
-
     <script src="https://d3js.org/d3.v5.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
-
-
-
-<!--
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <-- Compiled and minified CSS --
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Tamagotchi para leones y colibríes</title>
-</head>
-
-<body class="grey darken-4">
-    <div class="nav z-depth-0 yellow section">
-        <div class="section center">
-            <h3 class="center black-text">Tamagotchi</h2>
-        </div>
-    </div>
-    <div class="section center">
-        <p class="flow-text center white-text">Un gimnasio para <span class="yellow-text">leones</span> y <span class="yellow-text">colibríes</span></p>
-    </div>
-
-    <div class="container section">
-        <div class="row">
-            <div class="col s12 l5">
-                <button class="waves-effect waves-yellow btn-large grey darken-3 white-text active" data-activity="cycling">Cycling</button>
-                <button class="waves-effect waves-yellow btn-large grey darken-3 white-text" data-activity="walking">Walking</button>
-                <button class="waves-effect waves-yellow btn-large grey darken-3 white-text" data-activity="running">Running</button>
-                <button class="waves-effect waves-yellow btn-large grey darken-3 white-text" data-activity="swimming">Swimming</button>
-            </div>
-            <div class="col s12 l6 push-l1">
-                <div class="canvas"></div>
-            </div>
-        </div>
-        <div class="row">
-            <form class="col m6 push-m3">
-                <p class="flow-text grey-text center">How much <span>cycling</span> have you done today?</p>
-                <div class="input-field">
-                    <i class="material-icons prefix">trending_flat</i>
-                    <input type="text" class="grey-text" id="cycling" >
-                    <label for="cycling">Distance in m</label>
-                </div>
-                <p class="center pink-text error text-lighten-1"></p>
-            </form>
-        </div>
-    </div>
-
-    
-    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-firestore.js"></script>
-    <script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyBoKSJT1Wh5L5Yh_EcMOSRvJvsaH5_8NhI",
-            authDomain: "d3-netninja.firebaseapp.com",
-            databaseURL: "https://d3-netninja.firebaseio.com",
-            projectId: "d3-netninja",
-            storageBucket: "d3-netninja.appspot.com",
-            messagingSenderId: "1042361417502"
-        };
-        firebase.initializeApp(config);
-        const db = firebase.firestore();
-        db.settings({ timestampsInSnapshots: true });
-        db.settings(settings);
-    </script>
-    <script src="https://d3js.org/d3.v5.js"></script>
-    <script src="index.js"></script>
-    <script src="graph.js"></script>
-</body>
--->
