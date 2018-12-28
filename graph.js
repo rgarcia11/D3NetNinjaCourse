@@ -40,7 +40,7 @@ const update = data => {
 
     // 2. link data
     const circles = graph.selectAll('circle')
-        .data(data);
+        .data(data.filter(item => item.activity === activity));
 
     // 3. exit selection
     circles.exit().remove();

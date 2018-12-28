@@ -17,6 +17,8 @@ btns.forEach(btn => {
         input.setAttribute('id', activity);
         label.htmlFor = activity;
         formAct.textContent = activity;
+
+        update(data);
     });
 });
 
