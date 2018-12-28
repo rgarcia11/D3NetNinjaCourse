@@ -33,14 +33,22 @@ const yAxis = d3.axisLeft(y)
     .ticks(4)
     .tickFormat(d => `${d}m`);
 
+const line = d3.line()
+    .x(d => x(new Date(d.date)))
+    .y(d => y(d.distance));
+
+const path = graph.append('path');
+
 const update = data => {
     // 1. scale domains and axis
     x.domain(d3.extent(data, d => new Date(d.date)));
     y.domain([0, d3.max(data, d => d.distance)]);
 
-    // 2. link data
+    // 2. Filter, sort and link data
+    data = data.filter(item => item.activity === activity);
+    data.sort((a, b) => new Date(a.date) - new Date(b.date));
     const circles = graph.selectAll('circle')
-        .data(data.filter(item => item.activity === activity));
+        .data(data);
 
     // 3. exit selection
     circles.exit().remove();
@@ -64,6 +72,13 @@ const update = data => {
     xAxisGroup.selectAll('text')
         .attr('transform', `rotate(-40)`)
         .attr('text-anchor', `end`);
+
+    // Update path data
+    path.data([data])
+        .attr('fill', 'none')
+        .attr('stroke', '#ffeb3b')
+        .attr('stroke-width', 2)
+        .attr('d', line);
 };
 
 // data and firestore
