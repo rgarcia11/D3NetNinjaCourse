@@ -46,3 +46,25 @@ const pack = d3.pack()
   .padding(5);
 
 const bubbleData = pack(rootNode).descendants();
+
+const colour = d3.scaleOrdinal(['#f8bbd0', '#ff4081', '#f50057'])
+
+const nodes = graph.selectAll('g')
+    .data(bubbleData)
+    .enter()
+    .append('g')
+    .attr('transform', d => `translate(${d.x}, ${d.y})`)
+
+nodes.append('circle')
+  .attr('r', d => d.r)
+  .attr('stroke', 'white')
+  .attr('stroke-width', 2)
+  .attr('fill', d => colour(d.depth));
+
+leaves = nodes.filter(d => !d.height)
+    .append('text')
+        .attr('text-anchor', 'middle')
+        .attr('dy', '0.3em')
+        .attr('fill', 'white')
+        .style('font-size', d => d.value * 5)
+        .text(d => d.data.name);
