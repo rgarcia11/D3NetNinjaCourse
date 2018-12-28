@@ -32,3 +32,11 @@ form span{
 .input-field i.active{
     color: #212121 !important;
 }
+
+.x-axis{
+    color: #fff;
+}
+
+.y-axis{
+    color: #fff;
+}

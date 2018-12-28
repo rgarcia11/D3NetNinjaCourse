@@ -13,8 +13,27 @@ const graph = svg.append('g')
     .attr('height', graphHeight)
     .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
-const update = data => {
+const x = d3.scaleTime()
+    .range([0, graphWidth]);
 
+const y = d3.scaleLinear()
+    .range([graphHeight, 0]);
+
+xAxisGroup = graph.append('g')
+    .attr('class', 'x-axis')
+    .attr('transform', `translate(0, ${graphHeight})`);
+yAxisGroup = graph.append('g')
+    .attr('class', 'y-axis');
+
+
+const xAxis = d3.axisBottom(x);
+const yAxis = d3.axisLeft(y);
+
+const update = data => {
+    x.domain([0, 10]);
+    xAxisGroup.call(xAxis);
+    y.domain([0, 10]);
+    yAxisGroup.call(yAxis);
 };
 
 // data and firestore
