@@ -1,3 +1,18 @@
+const margin = { top: 40, right: 20, bottom: 50, left: 100 };
+const svgDims = { width: 560, height: 400 };
+const graphWidth = svgDims.width - margin.right - margin.left;
+const graphHeight = svgDims.height - margin.top - margin.bottom;
+
+const svg = d3.selectAll('.canvas')
+    .append('svg')
+    .attr('width', svgDims.width)
+    .attr('height', svgDims.height);
+
+const graph = svg.append('g')
+    .attr('width', graphWidth)
+    .attr('height', graphHeight)
+    .attr('transform', `translate(${margin.left}, ${margin.top})`);
+
 const update = data => {
 
 };
