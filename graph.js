@@ -26,13 +26,16 @@ yAxisGroup = graph.append('g')
     .attr('class', 'y-axis');
 
 
-const xAxis = d3.axisBottom(x);
-const yAxis = d3.axisLeft(y);
+const xAxis = d3.axisBottom(x)
+    .ticks(4);
+const yAxis = d3.axisLeft(y)
+    .ticks(4);
 
 const update = data => {
-    x.domain([0, 10]);
+    x.domain(d3.extent(data, d => new Date(d.date)));
+    y.domain([0, d3.max(data, d => d.distance)]);
+
     xAxisGroup.call(xAxis);
-    y.domain([0, 10]);
     yAxisGroup.call(yAxis);
 };
 
@@ -58,3 +61,8 @@ db.collection('activities').onSnapshot(res => {
     update(data);
 
 });
+
+const dateMaxAndMin = () => {
+    const dates = data.map(d => new Date(d.date));
+    return [Math.min(dates), Math.max(dates)];
+};
