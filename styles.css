@@ -1,21 +1,18 @@
 button{
-    background: #333;
     margin-bottom: 20px;
     width: 100%;
-    padding: 16px;
-    font-size: 1.6em;
-    color: #fff;
-    border: 0;
-    border-radius: 40px;
-    cursor: pointer;
 }
-button.active{
+
+button.waves-effect.waves-yellow.btn-large.grey.darken-3.white-text.active{
     background: #ffeb3b !important;
+    background-color: #ffeb3b !important;
     color: #000 !important;
 }
+
 form span{
     color: #ffeb3b;
 }
+
 .input-field input:focus + label {
     color: #ffeb3b !important;
 }
@@ -25,6 +22,13 @@ form span{
 }
   
 .input-field input:focus {
-border-bottom: 1px solid #ffeb3b !important;
-box-shadow: 0 1px 0 0 #ffeb3b !important;
+    box-shadow: 0 1px 0 0 #ffeb3b !important;
+}
+
+.input-field i{
+    color: #ffeb3b !important;
+}
+
+.input-field i.active{
+    color: #212121 !important;
 }

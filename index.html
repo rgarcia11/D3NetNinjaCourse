@@ -7,6 +7,7 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Tamagotchi para leones y colibríes</title>
 </head>
 
@@ -23,10 +24,10 @@
     <div class="container section">
         <div class="row">
             <div class="col s12 l5">
-                <button class="active" data-activity="cycling">Cycling</button>
-                <button data-activity="walking">Walking</button>
-                <button data-activity="running">Running</button>
-                <button data-activity="swimming">Swimming</button>
+                <button class="waves-effect waves-yellow btn-large grey darken-3 white-text active" data-activity="cycling">Cycling</button>
+                <button class="waves-effect waves-yellow btn-large grey darken-3 white-text" data-activity="walking">Walking</button>
+                <button class="waves-effect waves-yellow btn-large grey darken-3 white-text" data-activity="running">Running</button>
+                <button class="waves-effect waves-yellow btn-large grey darken-3 white-text" data-activity="swimming">Swimming</button>
             </div>
             <div class="col s12 l6 push-l1">
                 <div class="canvas"></div>
@@ -36,7 +37,8 @@
             <form class="col m6 push-m3">
                 <p class="flow-text grey-text center">How much <span>cycling</span> have you done today?</p>
                 <div class="input-field">
-                    <input type="text" class="grey-text" id="cycling" value=""/>
+                    <i class="material-icons prefix">trending_flat</i>
+                    <input type="text" class="grey-text" id="cycling" >
                     <label for="cycling">Distance in m</label>
                 </div>
                 <p class="center pink-text error text-lighten-1"></p>
@@ -44,6 +46,24 @@
         </div>
     </div>
 
+    
+    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBoKSJT1Wh5L5Yh_EcMOSRvJvsaH5_8NhI",
+            authDomain: "d3-netninja.firebaseapp.com",
+            databaseURL: "https://d3-netninja.firebaseio.com",
+            projectId: "d3-netninja",
+            storageBucket: "d3-netninja.appspot.com",
+            messagingSenderId: "1042361417502"
+        };
+        firebase.initializeApp(config);
+        const db = firebase.firestore();
+        db.settings({ timestampsInSnapshots: true });
+        db.settings(settings);
+    </script>
     <script src="https://d3js.org/d3.v5.js"></script>
     <script src="index.js"></script>
     <script src="graph.js"></script>
