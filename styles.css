@@ -1,0 +1,52 @@
+button{
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+button.waves-effect.waves-yellow.btn-large.grey.darken-3.white-text.active{
+    background: #ffeb3b !important;
+    background-color: #ffeb3b !important;
+    color: #000 !important;
+}
+
+form span{
+    color: #ffeb3b;
+}
+
+.input-field input:focus + label {
+    color: #ffeb3b !important;
+}
+
+.input-field label {
+    pointer-events: all !important;
+}
+  
+.input-field input:focus {
+    box-shadow: 0 1px 0 0 #ffeb3b !important;
+}
+
+.input-field i{
+    color: #ffeb3b !important;
+    transition: opacity 0.3s ease-in !important;
+    -ms-transition: opacity 0.3s ease-in !important;
+    -moz-transition: opacity 0.3s ease-in !important;
+    -webkit-transition: opacity 0.3s ease-in !important;
+}
+
+.input-field i.active{
+    opacity: 0 !important;
+    transition: opacity 0.2s ease-out !important;
+    -ms-transition: opacity 0.2s ease-out !important;
+    -moz-transition: opacity 0.2s ease-out !important;
+    -webkit-transition: opacity 0.2s ease-out !important;
+}
+
+.x-axis path, .y-axis path,
+.x-axis line, .y-axis line{
+    stroke: #ffeb3b;
+}
+
+.x-axis, .y-axis{
+    color: #ffeb3b;
+}
+
