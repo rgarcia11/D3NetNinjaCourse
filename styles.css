@@ -1,0 +1,30 @@
+button{
+    background: #333;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 16px;
+    font-size: 1.6em;
+    color: #fff;
+    border: 0;
+    border-radius: 40px;
+    cursor: pointer;
+}
+button.active{
+    background: #ffeb3b !important;
+    color: #000 !important;
+}
+form span{
+    color: #ffeb3b;
+}
+.input-field input:focus + label {
+    color: #ffeb3b !important;
+}
+
+.input-field label {
+    pointer-events: all !important;
+}
+  
+.input-field input:focus {
+border-bottom: 1px solid #ffeb3b !important;
+box-shadow: 0 1px 0 0 #ffeb3b !important;
+}

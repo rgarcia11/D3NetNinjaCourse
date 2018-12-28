@@ -10,16 +10,37 @@
     <title>Tamagotchi para leones y colibríes</title>
 </head>
 
-<body class="blue-grey darken-4">
-    <header class="blue-grey section">
-        <h2 class="center white-text">Tamagotchi</h2>
-        <p class="flow-text center lime-text text-lighten-5">Un gimnasio para leones y colibríes</p>
-    </header>
+<body class="grey darken-4">
+    <div class="nav z-depth-0 yellow section">
+        <div class="section center">
+            <h3 class="center black-text">Tamagotchi</h2>
+        </div>
+    </div>
+    <div class="section center">
+        <p class="flow-text center white-text">Un gimnasio para <span class="yellow-text">leones</span> y <span class="yellow-text">colibríes</span></p>
+    </div>
+
     <div class="container section">
         <div class="row">
-            <div class="col s12 m6">
-                <span class="blue-grey darken-3 white-text">Cycling</span>
+            <div class="col s12 l5">
+                <button class="active" data-activity="cycling">Cycling</button>
+                <button data-activity="walking">Walking</button>
+                <button data-activity="running">Running</button>
+                <button data-activity="swimming">Swimming</button>
             </div>
+            <div class="col s12 l6 push-l1">
+                <div class="canvas"></div>
+            </div>
+        </div>
+        <div class="row">
+            <form class="col m6 push-m3">
+                <p class="flow-text grey-text center">How much <span>cycling</span> have you done today?</p>
+                <div class="input-field">
+                    <input type="text" class="grey-text" id="cycling" value=""/>
+                    <label for="cycling">Distance in m</label>
+                </div>
+                <p class="center pink-text error text-lighten-1"></p>
+            </form>
         </div>
     </div>
 
@@ -89,4 +110,5 @@
     <script src="graph.js"></script>
 </body>
 -->
+
 </html>
