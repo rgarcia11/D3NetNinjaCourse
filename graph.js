@@ -139,7 +139,7 @@ db.collection('activities').onSnapshot(res => {
             removed: () => data.filter(item => item.id !== doc.id)
         }
 
-        data = switchOnChangeType[change.type]() || state.data;
+        data = switchOnChangeType[change.type]() || data;
 
     });
 
