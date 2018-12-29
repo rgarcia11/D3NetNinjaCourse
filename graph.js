@@ -8,6 +8,33 @@ const svg = d3.select('.canvas')
 const graph = svg.append('g')
     .attr('transform', `translate(50, 50)`);
 
+// data strat and tree!
+const stratify = d3.stratify()
+    .id(d => d.name)
+    .parentId(d => d.parent);
+
+const tree = d3.tree()
+    .size([dims.width, dims.height]);
+
+// update function!
+const update = data => {
+    // Scale domains
+
+    // Link data
+    const rootNode = stratify(data);
+    const treeData = tree(rootNode);
+    const nodes = graph.selectAll('.node')
+        .data(treeData.descendants())
+    
+    // Exit selection
+
+    // Current selection
+
+    // Enter selection
+
+    // Other elements
+};
+
 let data = [];
 
 db.collection('members').onSnapshot(res => {
@@ -26,6 +53,6 @@ db.collection('members').onSnapshot(res => {
 
     });
 
-    console.log(data);
+    update(data);
 
 });
