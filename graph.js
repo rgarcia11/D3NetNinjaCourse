@@ -16,9 +16,17 @@ const stratify = d3.stratify()
 const tree = d3.tree()
     .size([dims.width, dims.height]);
 
+// color scale
+const colour = d3.scaleOrdinal(['#f48fb1', '#ff1744', '#8c9eff', '#80deea']);
+
 // update function!
 const update = data => {
+
+    graph.selectAll('.node').remove();
+    graph.selectAll('.link').remove();
+
     // Scale domains
+    colour.domain(data.map(item => item.department));
 
     // Link data
     const rootNode = stratify(data);
@@ -34,23 +42,6 @@ const update = data => {
     // Current selection
 
     // Enter selection
-    const enterNodes = nodes.enter()
-        .append('g')
-            .attr('class', 'node')
-            .attr('transform', d => `translate(${d.x}, ${d.y})`);
-
-    enterNodes.append('rect')
-        .attr('fill', '#aaa')
-        .attr('stroke', '#555')
-        .attr('stroke-width', 2)
-        .attr('height', 50)
-        .attr('width', d => d.data.name.length * 28);
-
-    enterNodes.append('text')
-        .attr('text-anchor', 'middle')
-        .attr('fill', 'white')
-        .text(d => d.data.name);
-
     links.enter()
         .append('path')
         .attr('class', 'link')
@@ -60,6 +51,24 @@ const update = data => {
         .attr('d', d3.linkVertical()
             .x(d => d.x)
             .y(d => d.y));
+    
+    const enterNodes = nodes.enter()
+        .append('g')
+            .attr('class', 'node')
+            .attr('transform', d => `translate(${d.x}, ${d.y})`);
+
+    enterNodes.append('rect')
+        .attr('fill', d => colour(d.data.department))
+        .attr('stroke', '#555')
+        .attr('stroke-width', 2)
+        .attr('height', 50)
+        .attr('width', d => d.data.name.length * 20)
+        .attr('transform', d => `translate(${-d.data.name.length*10}, -31)`);
+
+    enterNodes.append('text')
+        .attr('text-anchor', 'middle')
+        .attr('fill', 'white')
+        .text(d => d.data.name);
 
     // Other elements
 };
