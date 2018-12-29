@@ -2,8 +2,8 @@ const dims = { height: 500, width: 1100 };
 
 const svg = d3.select('.canvas')
     .append('svg')
-    .width('width', dims.width + 100)
-    .height('height', dims.height + 100);
+    .attr('width', dims.width + 100)
+    .attr('height', dims.height + 100);
 
 const graph = svg.append('g')
     .attr('transform', `translate(50, 50)`);
@@ -26,11 +26,40 @@ const update = data => {
     const nodes = graph.selectAll('.node')
         .data(treeData.descendants())
     
+    const links = graph.selectAll('.links')
+        .data(treeData.links());
+    
     // Exit selection
 
     // Current selection
 
     // Enter selection
+    const enterNodes = nodes.enter()
+        .append('g')
+            .attr('class', 'node')
+            .attr('transform', d => `translate(${d.x}, ${d.y})`);
+
+    enterNodes.append('rect')
+        .attr('fill', '#aaa')
+        .attr('stroke', '#555')
+        .attr('stroke-width', 2)
+        .attr('height', 50)
+        .attr('width', d => d.data.name.length * 28);
+
+    enterNodes.append('text')
+        .attr('text-anchor', 'middle')
+        .attr('fill', 'white')
+        .text(d => d.data.name);
+
+    links.enter()
+        .append('path')
+        .attr('class', 'link')
+        .attr('fill', 'none')
+        .attr('stroke', '#aaa')
+        .attr('stroke-width', 2)
+        .attr('d', d3.linkVertical()
+            .x(d => d.x)
+            .y(d => d.y));
 
     // Other elements
 };
