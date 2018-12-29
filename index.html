@@ -7,16 +7,37 @@
     <title>Page Title</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-        text{
-            font-family: arial;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="deep-purple lighten-5">
-
+<body class="grey lighten-4">
+    <div class="red accent-2 section">
+        <h3 class="white-text center">Corporación</h3>
+    </div>
+    <div class="grey lighten-2 section z-depth-1">
+        <h1 class="flow-text grey-text text-darken-2 center">De leones y colibríes</h1>
+    </div>
     <div class="canvas"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBoKSJT1Wh5L5Yh_EcMOSRvJvsaH5_8NhI",
+            authDomain: "d3-netninja.firebaseapp.com",
+            databaseURL: "https://d3-netninja.firebaseio.com",
+            projectId: "d3-netninja",
+            storageBucket: "d3-netninja.appspot.com",
+            messagingSenderId: "1042361417502"
+        };
+        firebase.initializeApp(config);
+        const db = firebase.firestore();
+        const settings = { timestampsInSnapshots: true };
+        db.settings(settings);
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
     <script src="https://d3js.org/d3.v5.js"></script>
     <script src="index.js"></script>
+    <script src="graph.js"></script>
 </body>
 </html>
