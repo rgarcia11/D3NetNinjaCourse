@@ -10,13 +10,43 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="grey lighten-4">
+
     <div class="red accent-2 section">
         <h3 class="white-text center">Corporación</h3>
     </div>
-    <div class="grey lighten-2 section z-depth-1">
+
+    <div class="grey lighten-2 section z-depth-1" style="position: relative">
         <h1 class="flow-text grey-text text-darken-2 center">De leones y colibríes</h1>
+        <a href="#modal" class="btn-floating btn-large halfway-fab red accent-2 modal-trigger z-depth-2">
+            <i class="material-icons">add</i>
+        </a>
     </div>
-    <div class="canvas"></div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content container center">
+            <h4 class="red-text text-accent-2">Nuevo integrante</h4>
+            <form>
+                <div class="input-field">
+                    <input type="text" id="name">
+                    <label for="name">Nombre del integrante</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" id="parent">
+                    <label for="parent">Lo introdujo...</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" id="department">
+                    <label for="department">Departamento</label>
+                </div>
+                <div class="input-field center">
+                    <button class="btn red accent-2 white-text center">Agregar a la familia!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container">
+            <div class="canvas"></div>
+    </div>
 
     <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase-firestore.js"></script>
@@ -39,5 +69,6 @@
     <script src="https://d3js.org/d3.v5.js"></script>
     <script src="index.js"></script>
     <script src="graph.js"></script>
+    
 </body>
 </html>
