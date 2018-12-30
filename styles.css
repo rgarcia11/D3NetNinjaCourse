@@ -1,0 +1,29 @@
+text{
+    font-family: Arial;
+    font-size: 22px;
+}
+
+h3, .flow-text{
+    margin: 0 0 10px;
+}
+
+.modal{
+    max-width: 500px;
+}
+
+.canvas{
+    margin-top: 40px;
+}
+
+.input-field input:focus + label {
+    color: #ff5252 !important;
+}
+
+.input-field label {
+    pointer-events: all !important;
+}
+  
+.input-field input:focus {
+    box-shadow: 0 0 0 0 #ff5252 !important;
+    border-bottom: 1px solid #ff5252 !important;
+}
